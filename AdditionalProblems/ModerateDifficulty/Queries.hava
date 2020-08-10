@@ -1,0 +1,34 @@
+class Queries {
+public int[] processQueries(int[] queries, int m) {
+    int[] arr = new int[queries.length];
+    List<Integer> ls = createP(m);
+
+    // for each item in the list finds the item puts it at the start 
+    // of  the list and record'd position that the item was found
+    for(int i=0; i<queries.length; i++) {
+        int next = queries[i];
+        int j = 0;
+        for(Iterator it = ls.iterator(); it.hasNext();) {
+            Integer nextIt = (Integer) it.next();
+            if(next == ls.get(j)) {
+                arr[i] = j;
+                ls.remove(nextIt);
+                ls.add(0, nextIt);
+                break;
+            }
+            j++;
+        }
+    }
+    return arr;
+}
+
+// creates an arraylist with the numbers from 1 to m
+public List<Integer> createP(int m) {
+    List<Integer> ls = new ArrayList<Integer>();
+
+    for(int i=1; i<=m; i++) {
+        ls.add(i);
+    }
+    return ls;
+}
+}
